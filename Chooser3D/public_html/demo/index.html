@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+All code is ownership of Toocat d.o.o.
+Any usage without permission is strongly prohibited.
+All rights reserved.
+-->
+<html>
+    <head>
+        <title>Chooser3D Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../lib/three.min.js" type="text/javascript"></script>
+        <script src="../src/Chooser3D.js" type="text/javascript"></script>
+    </head>
+    <body style="margin: 0px; font-family: arial; font-size: 12pt; color: #556699; background-image: url('http://www.pulsarwallpapers.com/data/media/3/Alien%20Ink%202560X1600%20Abstract%20Background.jpg')">
+        <div id="chooser3DCanvas" style="z-index: 10; width: 400px; height: 300px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
+        <div id="chooser3DCanvasCaption" style="z-index: 10; text-align: center; width: 200px; height: 20px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
+        <div id="chooser3DCanvas2" style="z-index: 10; width: 400px; height: 300px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
+        <div id="chooser3DCanvas3" style="z-index: 10; width: 400px; height: 300px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
+        <div id="chooser3DCanvas4" style="z-index: 10; width: 400px; height: 300px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
+        <script type="text/javascript">
+            
+            var chooser3D = new THREE.Chooser3D('chooser3DCanvas')
+                    .addIconObject('images/social/badoo.png')
+                    .addIconObject('images/social/flickr.png')
+                    .addIconObject('images/social/plurk.png')
+                    .addIconObject('images/social/rss.png')
+                    .addIconObject('images/social/skype.png')
+                    .addIconObject('images/social/forrst.png')
+                    .eventHandler(function (object) {
+                            document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
+                        })
+                    .paint();
+            
+            var Identifier = {
+                INSTAGRAM: "INSTAGRAM",
+                LINE: "LINE",
+                TUMBLR: "TUMBLR",
+                TELEGRAM: "TELEGRAM",
+                TWITTER: "TWITTER",
+                VIBER: "VIBER",
+                VINE: "VINE",
+                GOOGLE_PLUS: "GOOGLE PLUS",
+                WHATSAPP: "WHATSAPP"
+            };
+            
+            var chooser3D2 = new THREE.Chooser3D('chooser3DCanvas2')
+                    .addIconObject('images/social/instagram.png', Identifier.INSTAGRAM)
+                    .addIconObject('images/social/line.png', Identifier.LINE)
+                    .addIconObject('images/social/tumblr.png', Identifier.TUMBLR)
+                    .addIconObject('images/social/telegram.png', Identifier.TELEGRAM)
+                    .addIconObject('images/social/twitter.png', Identifier.TWITTER)
+                    .addIconObject('images/social/viber.png', Identifier.VIBER)
+                    .addIconObject('images/social/vine.png', Identifier.VINE)
+                    .addIconObject('images/social/google-plus.png', Identifier.GOOGLE_PLUS)
+                    .addIconObject('images/social/whatsapp.png', Identifier.WHATSAPP)
+                    .eventHandler(function (object) {
+                            document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
+                        })
+                    .veryFast()
+                    .paint();
+            
+            chooser3D2.scale.multiplyScalar(0.75);
+            chooser3D2.rotation.x = Math.PI / 32;
+            
+            var chooser3D3 = new THREE.Chooser3D('chooser3DCanvas3')
+                    .addIconObject('images/social/vk.png')
+                    .addIconObject('images/social/vimeo.png')
+                    .addIconObject('images/social/xing.png')
+                    .addIconObject('images/social/youtube.png')
+                    .addIconObject('images/social/pinterest.png')
+                    .addIconObject('images/social/myspace.png')
+                    .eventHandler(function (object) {
+                            document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
+                        })
+                    .normal()
+                    .paint();
+            
+            chooser3D3.scale.multiplyScalar(0.85);
+            chooser3D3.rotation.x = Math.PI / 16;
+            chooser3D3.rotation.y = Math.PI / 16;
+            
+            
+            var chooser3D4 = new THREE.Chooser3D('chooser3DCanvas4')
+                    .addIconObject('images/social/bebo.png')
+                    .addIconObject('images/social/behance.png')
+                    .addIconObject('images/social/digg.png')
+                    .addIconObject('images/social/dribbble.png')
+                    .addIconObject('images/social/linkedin.png')
+                    .addIconObject('images/social/deviantart.png')
+                    .eventHandler(function (object) {
+                            document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
+                        })
+                    .fast()
+                    .paint();
+            
+            chooser3D4.scale.multiplyScalar(0.5);
+            chooser3D4.rotation.z = Math.PI / 32;
+            chooser3D4.rotation.y = Math.PI / 32;
+            
+        </script>
+    </body>
+</html>
