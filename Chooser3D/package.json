@@ -1,8 +1,0 @@
-{
-    "name": "Chooser3D",
-    "version": "1.0.0",
-    "keywords": ["widget", "client", "component", "browser"],
-    "author": "Toocat",
-    "contributors": ["ecivic"],
-    "dependencies": {}
-}
