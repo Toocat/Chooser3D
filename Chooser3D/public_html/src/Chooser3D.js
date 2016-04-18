@@ -2,16 +2,18 @@
  * @author ecivic / https://github.com/Toocat
  */
 
-/* global THREE */
+/* global THREE, Detector */
 
 (function () {
     
-    THREE.Chooser3D = function (canvasId) {
+    THREE.Chooser3D = function (canvasId, renderer, camera) {
 
         THREE.Object3D.call(this);
         this.name = 'chooser3d_' + this.id;
 
-        this.container = document.getElementById(canvasId);    
+        this.container = document.getElementById(canvasId);   
+        this.renderer = renderer;
+        this.camera = camera;
 
         this.scene = new THREE.Scene();
         this.leftSelector = new Arrow(Side.LEFT);
@@ -69,6 +71,9 @@
         
         this.selectorObjects.paint(this);
         paintTo.add(this);
+        
+        document.addEventListener('mousemove', this.onDocumentMouseMove.bind(this), false);
+        document.addEventListener('click', this.onDocumentMouseClick.bind(this), false);
         
         return this;
     };
@@ -136,7 +141,11 @@
     };
     
     THREE.Chooser3D.prototype.setup = function () {
-        this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+        if (Detector.webgl) {
+            this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+        } else {
+            this.renderer = new THREE.SoftwareRenderer({alpha: true});
+        }
         this.container.appendChild(this.renderer.domElement);
         this.renderer.setSize(this.renderer.domElement.parentNode.offsetWidth, this.renderer.domElement.parentNode.offsetHeight);
         
@@ -151,9 +160,6 @@
         this.light = new THREE.DirectionalLight(0xD1E8E7, 2.5, 1000);
         this.light.position.set(0, 0, 750);
         this.scene.add(this.light);
-        
-        document.addEventListener('mousemove', this.onDocumentMouseMove.bind(this), false);
-        document.addEventListener('click', this.onDocumentMouseClick.bind(this), false);
     
         this.animate();
         
@@ -164,14 +170,18 @@
         this.renderer.render(this.scene, this.camera);
     };
     
-    THREE.Chooser3D.prototype.animate = function () {
+    THREE.Chooser3D.prototype.animate = function (singleCall) {
         this.leftSelector.animate();
         this.rightSelector.animate();
         this.selectorObjects.animate();
         
         this.render();
         
-        requestAnimationFrame(this.animate.bind(this), this.renderer.domElement);
+        if (singleCall) {
+            return;
+        }
+        
+        requestAnimationFrame(this.animate.bind(this, singleCall), this.renderer.domElement);
     };
     
     var ShiftDirection = {
@@ -395,6 +405,8 @@
         var texture;
         var index;
         
+        var loader = new THREE.TextureLoader();
+        
         this.getIdent = function() {
             return ident;
         };
@@ -408,18 +420,17 @@
         };
         
         this.paint = function(scene) {
-            var image = THREE.ImageUtils.loadTexture(imgUrl);
+            var image = loader.load(imgUrl);
             
-            texture = new THREE.MeshBasicMaterial({
+            var material = new THREE.MeshBasicMaterial({
                     map: image,
                     transparent: true,
                     opacity: 1
                 });
-            image.dispose();
-            
+
             var geometry = new THREE.PlaneGeometry(60, 60);
-            mesh = new THREE.Mesh(geometry, texture);
-            
+            mesh = new THREE.Mesh(geometry, material);
+
             scene.add(mesh);
         };
         
