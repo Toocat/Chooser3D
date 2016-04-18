@@ -34,7 +34,7 @@ All rights reserved.
             
             THREEx.WindowResize(renderer, camera);     
 
-            var light = new THREE.DirectionalLight(0xD1E8E7, 2.5, 1000);
+            var light = new THREE.DirectionalLight(0xD1E8E7, 0.8, 1000);
             light.position.set(0, 0, 750);
             
             var scene = new THREE.Scene();
@@ -44,7 +44,7 @@ All rights reserved.
             var cubeMaterial;
             var loader = new THREE.TextureLoader();
             loader.load('images/social/plurk.png', function(texture) {
-		cubeMaterial = new THREE.MeshBasicMaterial({
+		cubeMaterial = new THREE.MeshPhongMaterial({
                     map: texture
                 });
                 
