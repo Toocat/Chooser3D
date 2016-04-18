@@ -1,6 +1,6 @@
 {
   "name": "Chooser3d",
   "tagline": "THREE.Chooser3D component",
-  "body": "### Demo\r\n[Demo page](http://toocat.info/projects/chooser3d/demo/)\r\n\r\n### Authors and Contributors\r\n@ecivic\r\n",
+  "body": "### Demo\r\n[HTML Demo page](http://toocat.info/projects/chooser3d/demo/htmlDemo.html)\r\n[Three.js Demo page](http://toocat.info/projects/chooser3d/demo/threejsDemo.html)\r\n\r\n### Authors and Contributors\r\n@ecivic\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
