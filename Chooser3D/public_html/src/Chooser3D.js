@@ -145,6 +145,7 @@
             this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
         } else {
             this.renderer = new THREE.SoftwareRenderer({alpha: true});
+            this.renderer.setClearColor(0x000000, 0);
         }
         this.container.appendChild(this.renderer.domElement);
         this.renderer.setSize(this.renderer.domElement.parentNode.offsetWidth, this.renderer.domElement.parentNode.offsetHeight);

@@ -943,6 +943,8 @@ THREE.SoftwareRenderer = function ( parameters ) {
 	var context = canvas.getContext( '2d', {
 		alpha: parameters.alpha === true
 	} );
+        
+        var alpha = parameters.alpha;
 
 	var shaders = {};
 	var textures = {};
@@ -1003,7 +1005,7 @@ THREE.SoftwareRenderer = function ( parameters ) {
 
 	this.setClearColor = function ( color, alpha ) {
 
-		clearColor.set( color );
+		clearColor.set( color, alpha ? 0 : 1 );
 		cleanColorBuffer();
 
 	};
@@ -1030,8 +1032,8 @@ THREE.SoftwareRenderer = function ( parameters ) {
 		canvas.width = canvasWidth;
 		canvas.height = canvasHeight;
 
-		context.fillStyle = clearColor.getStyle();
-		context.fillRect( 0, 0, canvasWidth, canvasHeight );
+		context.fillStyle = alpha ? "rgba(0, 0, 0, 0)" : clearColor.getStyle();
+		context.fillRect( 0, 0, alpha ? 0 : canvasWidth, alpha ? 0 : canvasHeight );
 
 		imagedata = context.getImageData( 0, 0, canvasWidth, canvasHeight );
 		data = imagedata.data;
@@ -1261,8 +1263,8 @@ THREE.SoftwareRenderer = function ( parameters ) {
 		canvas.width = canvasWidth;
 		canvas.height = canvasHeight;
 
-		context.fillStyle = clearColor.getStyle();
-		context.fillRect( 0, 0, canvasWidth, canvasHeight );
+		context.fillStyle = alpha ? "rgba(0, 0, 0, 0)" : clearColor.getStyle();
+		context.fillRect( 0, 0, alpha ? 0 : canvasWidth, alpha ? 0 : canvasHeight );
 
 		imagedata = context.getImageData( 0, 0, canvasWidth, canvasHeight );
 		data = imagedata.data;
@@ -1297,12 +1299,12 @@ THREE.SoftwareRenderer = function ( parameters ) {
 			data[ i ] = clearColor.r * 255 | 0;
 			data[ i + 1 ] = clearColor.g * 255 | 0;
 			data[ i + 2 ] = clearColor.b * 255 | 0;
-			data[ i + 3 ] = 255;
+			data[ i + 3 ] = 0;
 
 		}
 
-		context.fillStyle = clearColor.getStyle();
-		context.fillRect( 0, 0, canvasWidth, canvasHeight );
+		context.fillStyle = alpha ? "rgba(0, 0, 0, 0)" : clearColor.getStyle();
+		context.fillRect( 0, 0, alpha ? 0 : canvasWidth, alpha ? 0 : canvasHeight );
 
 	}
 
@@ -2403,7 +2405,7 @@ THREE.SoftwareRenderer = function ( parameters ) {
 				data[ poffset ++ ] = clearColor.r * 255 | 0;
 				data[ poffset ++ ] = clearColor.g * 255 | 0;
 				data[ poffset ++ ] = clearColor.b * 255 | 0;
-				data[ poffset ++ ] = 255;
+				data[ poffset ++ ] = alpha ? 0 : 255;
 
 			}
 
