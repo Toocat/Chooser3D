@@ -141,7 +141,7 @@
     };
     
     THREE.Chooser3D.prototype.setup = function () {
-        if (false /*Detector.webgl*/) {
+        if (Detector.webgl) {
             this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
         } else {
             this.renderer = new THREE.SoftwareRenderer({alpha: true});
