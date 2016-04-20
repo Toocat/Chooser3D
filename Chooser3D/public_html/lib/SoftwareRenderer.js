@@ -1299,7 +1299,7 @@ THREE.SoftwareRenderer = function ( parameters ) {
 			data[ i ] = clearColor.r * 255 | 0;
 			data[ i + 1 ] = clearColor.g * 255 | 0;
 			data[ i + 2 ] = clearColor.b * 255 | 0;
-			data[ i + 3 ] = 0;
+			data[ i + 3 ] = alpha ? 0 : 255;
 
 		}
 
