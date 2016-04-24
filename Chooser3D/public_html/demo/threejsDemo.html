@@ -34,7 +34,7 @@ All rights reserved.
             
             THREEx.WindowResize(renderer, camera);     
 
-            var light = new THREE.DirectionalLight(0xD1E8E7, 0.8, 1000);
+            var light = new THREE.DirectionalLight(0xffffff, 1.0);
             light.position.set(0, 0, 750);
             
             var scene = new THREE.Scene();
@@ -65,7 +65,8 @@ All rights reserved.
                     .addIconObject('images/social/rss.png')
                     .addIconObject('images/social/skype.png')
                     .addIconObject('images/social/forrst.png')
-                    .eventHandler(function (object) {
+                    .setArrowColor(0xffA500)
+                    .setEventHandler(function (object) {
                             loader.load(object.getIdent(), function(texture) {
                                 cubeMaterial.map = texture;
                                 cubeMaterial.needsUpdate = true;

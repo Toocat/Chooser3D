@@ -13,13 +13,36 @@ All rights reserved.
         <script src="../lib/Detector.js" type="text/javascript"></script>
         <script src="../lib/SoftwareRenderer.js" type="text/javascript"></script>
         <script src="../src/Chooser3D.js" type="text/javascript"></script>
+        <style>
+            body {
+                background: #E3EFEA; /* For browsers that do not support gradients */
+                background: -webkit-radial-gradient(circle, #E3EFEA, #319BB9, #1B597F); /* Safari */
+                background: -o-radial-gradient(circle, #E3EFEA, #319BB9, #1B597F); /* Opera 11.6 to 12.0 */
+                background: -moz-radial-gradient(circle, #E3EFEA, #319BB9, #1B597F); /* Firefox 3.6 to 15 */
+                background: radial-gradient(circle, #E3EFEA, #319BB9, #1B597F); /* Standard syntax */
+            }
+            
+            .chooserLayer {
+                z-index: 10; 
+                width: 400px; 
+                height: 300px; 
+                background-color: rgba(0,0,0,0); 
+                position: relative; 
+                left: 0px; 
+                right: 0px; 
+                top: 50px; 
+                margin: auto;
+            }
+        </style>
     </head>
-    <body style="margin: 0px; font-family: arial; font-size: 12pt; color: #556699; background-image: url('http://www.pulsarwallpapers.com/data/media/3/Alien%20Ink%202560X1600%20Abstract%20Background.jpg')">
-        <div id="chooser3DCanvas" style="z-index: 10; width: 400px; height: 300px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
-        <div id="chooser3DCanvasCaption" style="z-index: 10; text-align: center; width: 200px; height: 20px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
-        <div id="chooser3DCanvas2" style="z-index: 10; width: 400px; height: 300px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
-        <div id="chooser3DCanvas3" style="z-index: 10; width: 400px; height: 300px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
-        <div id="chooser3DCanvas4" style="z-index: 10; width: 400px; height: 300px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; margin: auto;"></div>
+    <body style="margin: 0px; font-family: arial; font-size: 12pt; color: #556699;">
+        <div id="chooser3DCanvas" class="chooserLayer"></div>
+        <div style="z-index: 11; text-align: center; width: 200px; height: 20px; background-color: rgba(0,0,0,0); position: relative; left: 0px; right: 0px; top: 50px; bottom: 50px; margin: auto;"><span id="chooser3DCanvasCaption"></span></div>
+        <div id="chooser3DCanvas2" class="chooserLayer"></div>
+        <div id="chooser3DCanvas3" class="chooserLayer"></div>
+        <div id="chooser3DCanvas4" class="chooserLayer"></div>
+        <div id="chooser3DCanvas5" class="chooserLayer"></div>
+        <div id="chooser3DCanvas6" class="chooserLayer"></div>
         <script type="text/javascript">
             
             var chooser3D = new THREE.Chooser3D('chooser3DCanvas')
@@ -29,7 +52,7 @@ All rights reserved.
                     .addIconObject('images/social/rss.png')
                     .addIconObject('images/social/skype.png')
                     .addIconObject('images/social/forrst.png')
-                    .eventHandler(function (object) {
+                    .setEventHandler(function (object) {
                             document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
                         })
                     .paint();
@@ -47,16 +70,17 @@ All rights reserved.
             };
             
             var chooser3D2 = new THREE.Chooser3D('chooser3DCanvas2')
-                    .addIconObject('images/social/instagram.png', Identifier.INSTAGRAM)
-                    .addIconObject('images/social/line.png', Identifier.LINE)
-                    .addIconObject('images/social/tumblr.png', Identifier.TUMBLR)
-                    .addIconObject('images/social/telegram.png', Identifier.TELEGRAM)
-                    .addIconObject('images/social/twitter.png', Identifier.TWITTER)
-                    .addIconObject('images/social/viber.png', Identifier.VIBER)
-                    .addIconObject('images/social/vine.png', Identifier.VINE)
-                    .addIconObject('images/social/google-plus.png', Identifier.GOOGLE_PLUS)
-                    .addIconObject('images/social/whatsapp.png', Identifier.WHATSAPP)
-                    .eventHandler(function (object) {
+                    .setArrowColor(0xff0000)
+                    .addIconObject('images/social/instagram.png', Identifier.INSTAGRAM, 60, 50)
+                    .addIconObject('images/social/line.png', Identifier.LINE, 60, 50)
+                    .addIconObject('images/social/tumblr.png', Identifier.TUMBLR, 60, 50)
+                    .addIconObject('images/social/telegram.png', Identifier.TELEGRAM, 60, 50)
+                    .addIconObject('images/social/twitter.png', Identifier.TWITTER, 60, 50)
+                    .addIconObject('images/social/viber.png', Identifier.VIBER, 60, 50)
+                    .addIconObject('images/social/vine.png', Identifier.VINE, 60, 50)
+                    .addIconObject('images/social/google-plus.png', Identifier.GOOGLE_PLUS, 60, 50)
+                    .addIconObject('images/social/whatsapp.png', Identifier.WHATSAPP, 60, 50)
+                    .setEventHandler(function (object) {
                             document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
                         })
                     .veryFast()
@@ -66,13 +90,14 @@ All rights reserved.
             chooser3D2.rotation.x = Math.PI / 32;
             
             var chooser3D3 = new THREE.Chooser3D('chooser3DCanvas3')
+                    .softwareRendering()
                     .addIconObject('images/social/vk.png')
                     .addIconObject('images/social/vimeo.png')
                     .addIconObject('images/social/xing.png')
                     .addIconObject('images/social/youtube.png')
                     .addIconObject('images/social/pinterest.png')
                     .addIconObject('images/social/myspace.png')
-                    .eventHandler(function (object) {
+                    .setEventHandler(function (object) {
                             document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
                         })
                     .normal()
@@ -90,7 +115,7 @@ All rights reserved.
                     .addIconObject('images/social/dribbble.png')
                     .addIconObject('images/social/linkedin.png')
                     .addIconObject('images/social/deviantart.png')
-                    .eventHandler(function (object) {
+                    .setEventHandler(function (object) {
                             document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
                         })
                     .fast()
@@ -99,6 +124,103 @@ All rights reserved.
             chooser3D4.scale.multiplyScalar(0.5);
             chooser3D4.rotation.z = Math.PI / 32;
             chooser3D4.rotation.y = Math.PI / 32;
+            
+            
+            var CustomArrow = function() {
+                var _self = this;
+                
+                var _color;
+                var _mesh;
+                var _group;
+                var _side;
+
+                this.setSide = function(side) {
+                    _side = side;
+                };
+
+                this.mouseOver = function() {
+                };
+
+                this.mouseOut = function() {
+                };
+
+                this.mouseClick = function() {
+                    return _side;
+                };
+
+                this.animate = function() {
+                };
+
+                this.setColor = function(arrowColor) {
+                    _color = arrowColor;
+                };
+
+                this.paint = function(paintTo) {
+                    _group = new THREE.Object3D();
+
+                    var texture = new THREE.MeshBasicMaterial({
+                        color: _color,
+                        side: THREE.FrontSide,
+                        opacity: 1
+                    });
+
+                    var geometry = new THREE.TetrahedronGeometry(30, 0);
+                    _mesh = new THREE.Mesh(geometry, texture);
+                    _mesh.rotation.z = _side === -1 ? -Math.PI / 4 : -Math.PI / 4;
+                    _mesh.rotation.y = _side === -1 ? -Math.PI / 16 : Math.PI / 16;
+                    _mesh.container = _self;
+
+                    _group.add(_mesh);
+                    _group.position.x = _side === -1 ? -350 : 350;
+
+                    paintTo.add(_group);
+                };
+
+                this.getChildren = function() {
+                    var objArray = new Array();
+                    objArray.push.apply(objArray, _group.children);
+                    return objArray;
+                };
+            };
+            
+            
+            var chooser3D5 = new THREE.Chooser3D('chooser3DCanvas5')
+                    .setLeftSelector(new CustomArrow())
+                    .setRightSelector(new CustomArrow())
+                    .setArrowColor(0x993333)
+                    .addIconObject('images/social/badoo.png')
+                    .addIconObject('images/social/flickr.png')
+                    .addIconObject('images/social/plurk.png')
+                    .addIconObject('images/social/rss.png')
+                    .addIconObject('images/social/skype.png')
+                    .addIconObject('images/social/forrst.png')
+                    .setEventHandler(function (object) {
+                            document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
+                        })
+                    .veryFast()
+                    .paint();
+            
+            var path = './objects/';
+            var chooser3D6 = new THREE.Chooser3D('chooser3DCanvas6')
+                    .setLight(0xffffff, 1)
+                    .addJSONObject(path + 'engineer.json', 'Engineer 1', 0.5, {y:Math.PI/2})
+                    .addJSONObject(path + 'gears-of-war-3-lambent-female.json', 'Zombie 1', 25, {y:-Math.PI/2})
+                    .addJSONObject(path + 'engineer.json', 'Engineer 2', 0.5, {y:Math.PI})
+                    .addJSONObject(path + 'floorskull.json', 'Skull', 10)
+                    .addJSONObject(path + 'engineer.json', 'Engineer 3', 0.5, {y:-Math.PI/3})
+                    .addJSONObject(path + 'gears-of-war-3-lambent-female.json', 'Zombie 2', 25, {y:-Math.PI/4})
+                    .addJSONObject(path + 'engineer.json', 'Engineer 4', 0.5, {x:-Math.PI/2})
+                    .addJSONObject(path + 'gears-of-war-3-lambent-female.json', 'Zombie 3', 25, {x:Math.PI/2})
+                    .addJSONObject(path + 'engineer.json', 'Engineer 5', 0.5, {x:Math.PI/2})
+                    .addJSONObject(path + 'engineer.json', 'Engineer 6', 0.5)
+                    .setEventHandler(function (object) {
+                            document.getElementById('chooser3DCanvasCaption').innerHTML = object.getIdent();
+                        })
+                    .veryFast()
+                    .paint();
+            
+            chooser3D6.rotation.x = Math.PI / 32;
+        
             
         </script>
     </body>
