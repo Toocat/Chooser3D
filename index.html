@@ -31,6 +31,11 @@
 <a href="http://toocat.info/projects/chooser3d/demo/threejsDemo.html">Three.js Demo page</a></p>
 
 <h3>
+<a id="device-support" class="anchor" href="#device-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Device support</h3>
+
+<p>Requires WebGL ready device, falls back to software renderer (currently without antialiasing).</p>
+
+<h3>
 <a id="ease-of-use" class="anchor" href="#ease-of-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ease of use</h3>
 
 <p><code>var chooser3D = new THREE.Chooser3D('chooser3DCanvas')</code><br>
@@ -44,6 +49,18 @@
                 <code>console.log(object.getIdent());</code><br>
         <code>})</code><br>
         <code>.paint();</code><br></p>
+
+<h3>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API</h3>
+
+<p><code>.slow() || .normal() || .fast() || .veryFast()</code> - determine the slide speed
+<code>.setLight(color, intensity)</code> - sets the directional light
+<code>.setArrowColor(color)</code> - set the color of the arrows
+<code>.setLeftSelector() &amp;&amp; setRightSelector()</code> - replace default arrows
+<code>.softwareRendering()</code> - forces usage of the software renderer
+<code>.addIconObject(imgUrl, ident, width, height)</code> - adds an icon 
+<code>.addJSONObject(jsonModelUrl, ident, scale, rotation)</code> - adds a JSON model
+<code>.setEventHandler(function(object){})</code> - set the event handler, object is the newly focused object</p>
 
 <h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
