@@ -6,14 +6,12 @@
 
 (function () {
     
-    THREE.Chooser3D = function (canvasId, renderer, camera) {
+    THREE.Chooser3D = function (canvasId) {
 
         THREE.Object3D.call(this);
         this.name = 'chooser3d_' + this.id;
 
-        this.container = document.getElementById(canvasId);   
-        this.renderer = renderer;
-        this.camera = camera;
+        this.container = document.getElementById(canvasId);
 
         this.scene = new THREE.Scene();
         this.leftSelector = new Arrow(Side.LEFT);
@@ -85,7 +83,7 @@
         return this;
     };
 
-    THREE.Chooser3D.prototype.paint = function (scene) {
+    THREE.Chooser3D.prototype.paint = function (scene, camera) {
         if (this.selectorObjects.getObjectsCount() < 6) {
             throw '6 or more objects are required for Chooser3D.';
         }
@@ -95,6 +93,7 @@
         /** RAYCASTER SETUP **/
         this.mouse = new THREE.Vector2();
         this.raycaster = new THREE.Raycaster();
+        this.camera = !camera ? this.camera : camera;
         /** **/
         
         this.selectorObjects.paint(this);
@@ -115,7 +114,7 @@
         event.stopPropagation();
         event.preventDefault();
 
-        var element = this.renderer.domElement.parentNode;
+        var element = this.container;
         this.mouse.x = ((event.clientX - element.offsetLeft + window.scrollX) / element.offsetWidth) * 2 - 1;
         this.mouse.y = - ((event.clientY - element.offsetTop + window.scrollY) / element.offsetHeight) * 2 + 1;
         
@@ -126,7 +125,7 @@
         event.stopPropagation();
         event.preventDefault();
 
-        var element = this.renderer.domElement.parentNode;
+        var element = this.container;
         this.mouse.x = ((event.clientX - element.offsetLeft + window.scrollX) / element.offsetWidth) * 2 - 1;
         this.mouse.y = - ((event.clientY - element.offsetTop + window.scrollY) / element.offsetHeight) * 2 + 1;
         
@@ -153,6 +152,11 @@
     };
     
     THREE.Chooser3D.prototype.handleMouseClick = function () {
+        if (!this.selectorObjects.allObjectsLoaded()) {
+            console.log("[INFO] Component is still loading.");
+            return;
+        }
+        
         this.raycaster.setFromCamera(this.mouse, this.camera);
         
         var objArray = new Array();
@@ -222,11 +226,11 @@
         this.rightSelector.animate();
         this.selectorObjects.animate();
         
-        this.render();
-        
         if (singleCall) {
             return;
         }
+        
+        this.render();
         
         requestAnimationFrame(this.animate.bind(this, singleCall), this.renderer.domElement);
     };
@@ -244,6 +248,18 @@
         
         var _speed = 1;
         var _eventHandler;
+        
+        this.allObjectsLoaded = function() {
+            var numOfObjects = _objects.length;
+            for (var i = 0; i < numOfObjects; i++) {
+                var object = _objects[i];
+                if (!object.isLoaded()) {
+                    return false;
+                }
+            }
+            
+            return true;
+        };
         
         this.setSpeed = function(speed) {
             _speed = speed;
