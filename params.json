@@ -1,6 +1,6 @@
 {
   "name": "Chooser3D",
   "tagline": "THREE.Chooser3D component",
-  "body": "### Welcome to the THREE.Chooser3D plugin GitHub Page.\r\n![chooser 3d img](http://i65.tinypic.com/2u7nhns.png)\r\n\r\n### Demo\r\n[HTML Demo page](http://toocat.info/projects/chooser3d/demo/htmlDemo.html)<br/>\r\n[Three.js Demo page](http://toocat.info/projects/chooser3d/demo/threejsDemo.html)\r\n\r\n### Authors and Contributors\r\n@ecivic\r\n",
+  "body": "### Welcome to the THREE.Chooser3D plugin GitHub Page.\r\n![chooser 3d img](http://i65.tinypic.com/2u7nhns.png)\r\n\r\n### Demo\r\n[HTML Demo page](http://toocat.info/projects/chooser3d/demo/htmlDemo.html)<br/>\r\n[Three.js Demo page](http://toocat.info/projects/chooser3d/demo/threejsDemo.html)\r\n\r\n### Ease of use\r\n\r\nvar chooser3D = new THREE.Chooser3D('chooser3DCanvas')\r\n                    .addIconObject('images/social/badoo.png')\r\n                    .addIconObject('images/social/flickr.png')\r\n                    .addIconObject('images/social/plurk.png')\r\n                    .addIconObject('images/social/rss.png')\r\n                    .addIconObject('images/social/skype.png')\r\n                    .addIconObject('images/social/forrst.png')\r\n                    .setEventHandler(function (object) {\r\n                           console.log(object.getIdent());\r\n                        })\r\n                    .paint();\r\n\r\n### Authors and Contributors\r\n@ecivic\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }

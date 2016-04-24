@@ -31,6 +31,21 @@
 <a href="http://toocat.info/projects/chooser3d/demo/threejsDemo.html">Three.js Demo page</a></p>
 
 <h3>
+<a id="ease-of-use" class="anchor" href="#ease-of-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ease of use</h3>
+
+<p>var chooser3D = new THREE.Chooser3D('chooser3DCanvas')
+                    .addIconObject('images/social/badoo.png')
+                    .addIconObject('images/social/flickr.png')
+                    .addIconObject('images/social/plurk.png')
+                    .addIconObject('images/social/rss.png')
+                    .addIconObject('images/social/skype.png')
+                    .addIconObject('images/social/forrst.png')
+                    .setEventHandler(function (object) {
+                           console.log(object.getIdent());
+                        })
+                    .paint();</p>
+
+<h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
 <p><a href="https://github.com/ecivic" class="user-mention">@ecivic</a></p>
