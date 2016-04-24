@@ -58,7 +58,7 @@ All rights reserved.
                 texture.dispose();
             });
             
-            var chooser3D = new THREE.Chooser3D('threeJsCanvas', renderer, camera)
+            var chooser3D = new THREE.Chooser3D('threeJsCanvas')
                     .addIconObject('images/social/badoo.png')
                     .addIconObject('images/social/flickr.png')
                     .addIconObject('images/social/plurk.png')
@@ -74,7 +74,7 @@ All rights reserved.
                             });
                         })
                     .fast()
-                    .paint(scene);
+                    .paint(scene, camera);
             
             chooser3D.position.y = -100;
             
