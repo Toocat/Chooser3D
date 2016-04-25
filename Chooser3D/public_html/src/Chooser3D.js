@@ -556,7 +556,7 @@
                 if (child instanceof THREE.Mesh) {
                     child.material.opacity += opacity;
                 } else if (child instanceof THREE.Object3D) {
-                    setOpacityForChildren(child, opacity);
+                    addOpacityForChildren(child, opacity);
                 }
             }
         }
