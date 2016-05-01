@@ -504,6 +504,7 @@
                 if (child instanceof THREE.Scene
                         || child instanceof THREE.Object3D) {
                     clear(child);
+                    return;
                 }
                 if (!(child instanceof THREE.Mesh)) {
                     parentGroup.remove(child);
