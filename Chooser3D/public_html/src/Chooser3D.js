@@ -501,12 +501,11 @@
             var childrenLength = parentGroup.children.length;
             for (var i = childrenLength - 1; i >= 0; i--) {
                 var child = parentGroup.children[i];
-                if (child instanceof THREE.Scene
-                        || child instanceof THREE.Object3D) {
+                if (child.type === 'Object3D') {
                     clear(child);
                     return;
                 }
-                if (!(child instanceof THREE.Mesh)) {
+                if (!(child.type === 'Mesh')) {
                     parentGroup.remove(child);
                 } else {
                     child.material.transparent = true;
